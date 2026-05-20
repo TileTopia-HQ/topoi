@@ -9,8 +9,10 @@ mod clipping;
 mod delaunay;
 mod envelope;
 mod error;
+pub mod geojson;
 mod geometry;
 mod predicates;
+mod rtree;
 
 pub use algorithms::{convex_hull, segment_intersection, simplify};
 pub use buffer::buffer_polygon;
@@ -22,3 +24,4 @@ pub use envelope::Envelope;
 pub use error::Error;
 pub use geometry::{Coord, LineString, MultiPolygon, Point, Polygon, Ring};
 pub use predicates::{contains, intersects};
+pub use rtree::RTree;

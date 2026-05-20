@@ -7,4 +7,7 @@ pub enum Error {
 
     #[error("topology error: {0}")]
     TopologyError(String),
+
+    #[error("parse error: {0}")]
+    ParseError(String),
 }

@@ -69,4 +69,36 @@ impl Envelope {
             max_y: self.max_y.max(other.max_y),
         }
     }
+
+    /// Alias for `union` used in R-tree building.
+    pub fn merge(&self, other: &Self) -> Self {
+        self.union(other)
+    }
+
+    pub fn center_x(&self) -> f64 {
+        (self.min_x + self.max_x) / 2.0
+    }
+
+    pub fn center_y(&self) -> f64 {
+        (self.min_y + self.max_y) / 2.0
+    }
+
+    /// Minimum distance from a point to this envelope (0 if inside).
+    pub fn distance_to_point(&self, p: &Coord) -> f64 {
+        let dx = if p.x < self.min_x {
+            self.min_x - p.x
+        } else if p.x > self.max_x {
+            p.x - self.max_x
+        } else {
+            0.0
+        };
+        let dy = if p.y < self.min_y {
+            self.min_y - p.y
+        } else if p.y > self.max_y {
+            p.y - self.max_y
+        } else {
+            0.0
+        };
+        (dx * dx + dy * dy).sqrt()
+    }
 }
